@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<section class="section">
+  <h1>Create your account</h1>
+  <p>Set up your profile so you can save orders and get notified when new chaos drops.</p>
+  <% if (error) { %>
+    <div class="alert"><%= error %></div>
+  <% } %>
+  <% if (!submitted) { %>
+    <form method="post" action="/account/create" class="form">
+      <label>Email
+        <input type="email" name="email" required>
+      </label>
+      <label>Username
+        <input type="text" name="username" required>
+      </label>
+      <label>Password
+        <input type="password" name="password" required>
+      </label>
+      <button class="button" type="submit">Create account</button>
+    </form>
+  <% } else { %>
+    <div class="success">
+      <p>Account created for <strong><%= username %></strong> (<%= email %>). Authentication will be wired up next.</p>
+      <a class="link" href="/products">Start browsing</a>
+    </div>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

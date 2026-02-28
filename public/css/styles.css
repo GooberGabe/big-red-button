@@ -1,0 +1,110 @@
+:root {
+  --bg: #f9f9fb;
+  --text: #121214;
+  --accent: #c1121f;
+  --muted: #575757;
+  --card: #ffffff;
+  --border: #e1e1e6;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.branding .logo {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.nav a { margin-left: 1rem; font-weight: 600; }
+
+.page { padding: 2rem; max-width: 1100px; margin: 0 auto; }
+
+.hero {
+  padding: 3rem 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.section { margin-top: 2.5rem; }
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.price { font-weight: 700; }
+
+.button {
+  display: inline-block;
+  padding: 0.6rem 1.1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button:hover { filter: brightness(0.9); }
+
+.link { font-weight: 600; }
+
+.form { display: grid; gap: 1rem; max-width: 480px; }
+.form label { display: grid; gap: 0.4rem; color: var(--muted); font-weight: 600; }
+.form input, .form textarea {
+  padding: 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: #ffe5e5;
+  color: #8a1c1c;
+  border: 1px solid #f3b3b3;
+}
+
+.success {
+  padding: 1rem;
+  border-radius: 8px;
+  background: #e7f7ed;
+  border: 1px solid #b6dfc6;
+}
+
+.site-footer {
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: var(--muted);
+}

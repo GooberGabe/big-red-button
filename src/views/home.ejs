@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<section class="hero">
+  <h1>Big Red Button</h1>
+  <p>A party card game about surviving the apocalypse at everyone else's expense.</p>
+  <a class="button" href="/products">Shop the deck</a>
+</section>
+
+<section class="section">
+  <h2>Featured products</h2>
+  <div class="grid">
+    <% featured.forEach((item) => { %>
+      <article class="card">
+        <h3><%= item.name %></h3>
+        <p><%= item.description %></p>
+        <p class="price">$<%= item.price.toFixed(2) %></p>
+        <a class="link" href="/products">View details</a>
+      </article>
+    <% }) %>
+  </div>
+</section>
+<%- include('partials/footer') %>
