@@ -23,5 +23,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Big Red Button app listening on port ${PORT}`);
+  console.log(`Big Red Button server running at http://127.0.0.1:${PORT}`);
 });

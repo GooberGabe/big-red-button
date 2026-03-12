@@ -1,5 +1,7 @@
 import { getAllProducts } from '../models/productModel.js';
 
+// Controller for the home page
+// routes/index.js - > router.get('/', showHome);
 export const showHome = (req, res, next) => {
   try {
     const featured = getAllProducts().slice(0, 3);

@@ -4,6 +4,8 @@ import { listProducts } from '../controllers/productController.js';
 import { showCreateForm, handleCreate } from '../controllers/accountController.js';
 import { showForm, handleSubmit } from '../controllers/contactController.js';
 
+// Hook up controllers to routes 
+
 const router = Router();
 
 router.get('/', showHome);
