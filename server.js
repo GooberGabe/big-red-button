@@ -13,6 +13,16 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src', 'views'));
 
+app.use((req, res, next) => {
+  res.locals.NODE_ENV = process.env.NODE_ENV.toLowerCase() || 'production';
+  next();
+});
+
+app.use((req, res, next) => {
+    res.locals.queryParams = req.query || {};
+    next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', router);
