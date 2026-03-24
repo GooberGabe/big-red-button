@@ -6,7 +6,7 @@
       <article class="card">
         <h2><%= item.name %></h2>
         <p><%= item.description %></p>
-        <p class="price">$<%= item.price.toFixed(2) %></p>
+        <p class="price">$<%= Number(item.price).toFixed(2) %></p>
         <button class="button" type="button">Add to cart</button>
       </article>
     <% }) %>

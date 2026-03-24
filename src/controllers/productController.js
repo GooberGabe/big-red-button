@@ -1,8 +1,8 @@
 import { getAllProducts } from '../models/productModel.js';
 
-export const listProducts = (req, res, next) => {
+export const listProducts = async (req, res, next) => {
   try {
-    const products = getAllProducts();
+    const products = await getAllProducts();
     res.render('products', { title: 'Products', products });
   } catch (error) {
     next(error);

@@ -2,9 +2,10 @@ import { getAllProducts } from '../models/productModel.js';
 
 // Controller for the home page
 // routes/index.js - > router.get('/', showHome);
-export const showHome = (req, res, next) => {
+export const showHome = async (req, res, next) => {
   try {
-    const featured = getAllProducts().slice(0, 3);
+    const products = await getAllProducts();
+    const featured = products.slice(0, 3);
     res.render('home', { title: 'Big Red Button', featured });
   } catch (error) {
     next(error);

@@ -11,7 +11,7 @@ const errorHandler = (err, req, res, next) => {
   // Prepare data for the template
   const context = {
     title: status === 404 ? 'Page Not Found' : 'Server Error',
-    error: NODE_ENV === 'production' ? 'An error occurred' : err.message,
+    message: NODE_ENV === 'production' ? 'An error occurred' : err.message,
     stack: NODE_ENV === 'production' ? null : err.stack,
     NODE_ENV // Our WebSocket check needs this and its convenient to pass along
   };
