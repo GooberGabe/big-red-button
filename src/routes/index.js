@@ -1,20 +1,31 @@
 import { Router } from 'express';
 import { showHome } from '../controllers/homeController.js';
 import { listProducts } from '../controllers/productController.js';
-import { showCreateForm, handleCreate } from '../controllers/accountController.js';
-import { showForm, handleSubmit } from '../controllers/contactController.js';
+// Removed accountController and contactController imports
+import { showRegistrationForm, processRegistration, showAllUsers } from '../controllers/userController.js';
 
 // Hook up controllers to routes 
 
 const router = Router();
 
+router.use('/', (req, res, next) => {
+    res.addStyle('<link rel="stylesheet" href="/css/styles.css">');
+    next();
+});
+
 router.get('/', showHome);
 router.get('/products', listProducts);
 
-router.get('/account/create', showCreateForm);
-router.post('/account/create', handleCreate);
+// Removed /account/create routes
 
-router.get('/contact', showForm);
-router.post('/contact', handleSubmit);
+
+// User registration
+router.get('/register', showRegistrationForm);
+router.post('/register', processRegistration);
+
+// User list
+router.get('/users', showAllUsers);
+
+// Removed /contact routes
 
 export default router;

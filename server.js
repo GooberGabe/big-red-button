@@ -5,7 +5,8 @@ import { fileURLToPath } from 'url';
 import router from './src/routes/index.js';
 import notFound from './src/middleware/notFound.js';
 import errorHandler from './src/middleware/errorHandler.js';
-import addLocalVariables from './src/middleware/global.js';  
+import { addLocalVariables } from './src/middleware/global.js';  
+import { setupDatabase, testConnection } from './src/models/setup.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,6 +43,8 @@ if (NODE_ENV.includes('dev')) {
     }
 }
 
-app.listen(PORT, () => {
-  console.log(`Big Red Button server running at http://127.0.0.1:${PORT} in ${NODE_ENV} mode`);
+app.listen(PORT, async () => {
+    await setupDatabase();
+    await testConnection();
+    console.log(`Big Red Button server running at http://127.0.0.1:${PORT} in ${NODE_ENV} mode`);
 });

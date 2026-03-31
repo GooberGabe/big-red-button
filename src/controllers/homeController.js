@@ -1,4 +1,4 @@
-import { getAllProducts } from '../models/productModel.js';
+import { getAllProducts } from '../models/products/productModel.js';
 
 // Controller for the home page
 // routes/index.js - > router.get('/', showHome);

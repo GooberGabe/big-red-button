@@ -1,3 +1,65 @@
+.form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.form button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.form button:hover {
+  background: #a10e1a;
+}
+.errors {
+  background: #ffe5e5;
+  color: #c1121f;
+  border: 1px solid #f5c2c7;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  list-style: disc inside;
+}
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+}
+.user-table th, .user-table td {
+  border: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+.user-table th {
+  background: var(--card);
+  font-weight: 700;
+}
+.user-table tr:nth-child(even) {
+  background: #f6f6fa;
+}
 :root {
   --bg: #f9f9fb;
   --text: #121214;
