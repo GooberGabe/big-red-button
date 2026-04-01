@@ -7,7 +7,7 @@ Foundational Express + EJS MVC app for the Big Red Button card game.
 - `server.js` – Express configuration, view engine, middleware, routes, and server start
 - `src/routes` – Route definitions
 - `src/controllers` – Request handlers
-- `src/models` – Domain data placeholders (to be replaced with PostgreSQL)
+- `src/models` – Database definitions with PostgreSQL
 - `src/views` – EJS templates and partials
 - `public` – Static assets (CSS, images)
 
@@ -17,3 +17,4 @@ Generative AI was used in the following applications:
 - Most CSS styles
 - EJS partials (for HTML structure)
 - Database queries (sql/seed.sql)
+- .gitignore
