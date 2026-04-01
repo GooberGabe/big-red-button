@@ -4,7 +4,7 @@ import { showProfile } from '../controllers/profileController.js';
 import { listProducts } from '../controllers/productController.js';
 import { showRegistrationForm, processRegistration, showAllUsers, registrationValidation } from '../controllers/forms/registration.js';
 import { showLoginForm, processLogin, processLogout, loginValidation } from '../controllers/forms/login.js';
-import { requireLogin } from '../middleware/auth.js';
+import { requireLogin, requireAdmin } from '../middleware/auth.js';
 
 const router = Router();
 
@@ -20,20 +20,18 @@ router.use('/', (req, res, next) => {
 
 router.get('/', showHome);
 router.get('/products', listProducts);
+router.get('/profile', requireLogin, showProfile);
 
 // User registration
 router.get('/register', showRegistrationForm);
 router.post('/register', registrationValidation, processRegistration);
 
 // User list
-router.get('/users', requireLogin, showAllUsers);
+router.get('/users', requireAdmin, showAllUsers);
 
 // Login/logout routes
 router.get('/login', showLoginForm);
 router.post('/login', loginValidation, processLogin);
 router.get('/logout', processLogout);
-
-// Account route
-router.get('/profile', requireLogin, showProfile);
 
 export default router;

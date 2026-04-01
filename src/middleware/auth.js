@@ -6,4 +6,12 @@ const requireLogin = (req, res, next) => {
     }
 };
 
-export { requireLogin };
+const requireAdmin = (req, res, next) => {
+    if (req.session && req.session.user && req.session.user.isAdmin) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+};
+
+export { requireLogin, requireAdmin };
