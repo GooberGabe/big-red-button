@@ -26,3 +26,8 @@ export const getUserByEmail = async (email) => {
   const res = await db.query('SELECT * FROM accounts WHERE email = $1', [email]);
   return res.rows[0];
 };
+
+// Verify password for login
+export const verifyPassword = async (plainPassword, hashedPassword) => {
+    return await bcrypt.compare(plainPassword, hashedPassword);
+};

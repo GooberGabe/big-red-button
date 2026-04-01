@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { showHome } from '../controllers/homeController.js';
 import { listProducts } from '../controllers/productController.js';
-// Removed accountController and contactController imports
-import { showRegistrationForm, processRegistration, showAllUsers } from '../controllers/userController.js';
+import { showRegistrationForm, processRegistration, showAllUsers, registrationValidation } from '../controllers/forms/registration.js';
+import { showLoginForm, processLogin, processLogout, loginValidation } from '../controllers/forms/login.js';
+import { requireLogin } from '../middleware/auth.js';
 
 // Hook up controllers to routes 
 
@@ -16,16 +17,16 @@ router.use('/', (req, res, next) => {
 router.get('/', showHome);
 router.get('/products', listProducts);
 
-// Removed /account/create routes
-
-
 // User registration
 router.get('/register', showRegistrationForm);
-router.post('/register', processRegistration);
+router.post('/register', registrationValidation, processRegistration);
 
 // User list
-router.get('/users', showAllUsers);
+router.get('/users', requireLogin, showAllUsers);
 
-// Removed /contact routes
+// Login/logout routes
+router.get('/login', showLoginForm);
+router.post('/login', loginValidation, processLogin);
+router.get('/logout', processLogout);
 
 export default router;

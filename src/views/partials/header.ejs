@@ -4,19 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %> | Big Red Button</title>
+  <link rel="icon" type="image/x-icon" href="/css/icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/css/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/icons/favicon-16x16.png">
   <%- renderStyles() %>
   <%- renderScripts() %>
 </head>
 <body>
   <header class="site-header">
     <div class="branding">
-      <span class="logo">Big Red Button</span>
+      <a href="/">
+        <img src="/css/icons/brb-logo.png" alt="Big Red Button Logo" class="logo-img" style="height:40px;vertical-align:middle;" />
+      </a>
     </div>
     <nav class="nav">
       <a href="/">Home</a>
       <a href="/products">Products</a>
-      <a href="/register">Register</a>
       <a href="/users">Users</a>
+      <% if (!isLoggedIn) { %>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      <% } else { %>
+        <a href="/logout">Logout</a>
+      <% } %>
     </nav>
   </header>
   <main class="page">
