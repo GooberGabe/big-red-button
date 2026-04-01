@@ -3,15 +3,15 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import session from 'express-session';
 import connectPgSimple from 'connect-pg-simple';
-import { caCert } from './src/models/db.js';
+import { pool } from './src/models/db.js';
 import { startSessionCleanup } from './src/utils/session-cleanup.js';
+import flash from './src/middleware/flash.js';
 
 import router from './src/routes/index.js';
 import notFound from './src/middleware/notFound.js';
 import errorHandler from './src/middleware/errorHandler.js';
 import { addLocalVariables } from './src/middleware/global.js';  
 import { setupDatabase, testConnection } from './src/models/setup.js';
-import { checkServerIdentity } from 'tls';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,14 +27,7 @@ const pgSession = connectPgSimple(session);
 // Session middleware
 app.use(session({
     store: new pgSession({
-        conObject: {
-            connectionString: process.env.DB_URL,
-            ssl: {
-                ca: caCert,
-                rejectUnauthorized: true,
-                checkServerIdentity: () => { return undefined; }
-            },
-        },
+        pool,
         tableName: 'session',
         createTableIfMissing: true,
     }),
@@ -59,6 +52,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 
 app.use(addLocalVariables);
+
+app.use(flash);
 
 app.use('/', router);
 app.use(notFound);

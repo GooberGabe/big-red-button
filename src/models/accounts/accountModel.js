@@ -1,4 +1,5 @@
 import { db } from '../db.js';
+import bcrypt from 'bcrypt';
 
 // Check if an email already exists
 export const emailExists = async (email) => {
@@ -9,8 +10,8 @@ export const emailExists = async (email) => {
 // Save a new user
 export const saveUser = async ({ email, username, password }) => {
   const res = await db.query(
-    'INSERT INTO accounts (email, username, password) VALUES ($1, $2, $3) RETURNING *',
-    [email, username, password]
+    'INSERT INTO accounts (email, username, password, role) VALUES ($1, $2, $3, $4) RETURNING *',
+    [email, username, password, 'user']
   );
   return res.rows[0];
 };
@@ -24,6 +25,12 @@ export const getAllUsers = async () => {
 // Get user by email
 export const getUserByEmail = async (email) => {
   const res = await db.query('SELECT * FROM accounts WHERE email = $1', [email]);
+  return res.rows[0];
+};
+
+// Get user by username
+export const getUserByUsername = async (username) => {
+  const res = await db.query('SELECT * FROM accounts WHERE username = $1', [username]);
   return res.rows[0];
 };
 

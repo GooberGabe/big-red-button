@@ -1,0 +1,41 @@
+/* Layout and structure */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.branding {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.nav-center {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+.nav a {
+  margin-left: 1rem;
+  font-weight: 600;
+}
+
+.page { padding: 2rem; max-width: 1100px; margin: 0 auto; }
+
+.site-footer {
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: var(--muted);
+}

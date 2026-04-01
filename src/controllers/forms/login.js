@@ -21,7 +21,7 @@ export const processLogin = async (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        console.log('Validation errors:', errors.array());
+        errors.array().forEach(err => req.flash('error', err.msg));
         return res.redirect('/login');
     }
 
@@ -30,22 +30,24 @@ export const processLogin = async (req, res) => {
     try {
         const user = await getUserByEmail(email)
         if (!user) {
-            console.log('User not found for email:', email);
+            req.flash('error', 'No account found with that email.');
             return res.redirect('/login');
         }
 
         const isPasswordValid = await verifyPassword(password, user.password);
         if (!isPasswordValid) {
-            console.log('Invalid password for email:', email);
+            req.flash('error', 'Incorrect password.');
             return res.redirect('/login');
         }
 
         delete user.password;
 
         req.session.user = user;
+        req.flash('success', 'Login successful!');
         return res.redirect('/');
     } catch (error) {
         console.error('Error during login process:', error);
+        req.flash('error', 'An error occurred during login. Please try again.');
         return res.redirect('/login');
     }
 };

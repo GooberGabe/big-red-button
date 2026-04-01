@@ -12,10 +12,6 @@ export const registrationValidation = [
     .isEmail()
     .normalizeEmail()
     .withMessage('Must be a valid email address'),
-  body('emailConfirm')
-    .trim()
-    .custom((value, { req }) => value === req.body.email)
-    .withMessage('Email addresses must match'),
   body('password')
     .isLength({ min: 8 })
     .withMessage('Password must be at least 8 characters')
@@ -23,7 +19,7 @@ export const registrationValidation = [
     .withMessage('Password must contain at least one number')
     .matches(/[!@#$%^&*]/)
     .withMessage('Password must contain at least one special character'),
-  body('passwordConfirm')
+  body('confirmPassword')
     .custom((value, { req }) => value === req.body.password)
     .withMessage('Passwords must match')
 ];
@@ -46,19 +42,23 @@ export const processRegistration = async (req, res) => {
   const result = validationResult(req);
   if (!result.isEmpty()) {
     result.array().forEach(err => errors.push(err.msg));
+    errors.forEach(msg => req.flash('error', msg));
     return res.render('register', { title: 'Register', errors, formData });
   }
 
   // Custom validation: check if email already exists
   if (await emailExists(req.body.email)) {
-    errors.push('Email is already registered.');
+    const msg = 'Email is already registered.';
+    req.flash('error', msg);
+    errors.push(msg);
     return res.render('register', { title: 'Register', errors, formData });
   }
 
   // Hash password and save user
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   await saveUser({ email: req.body.email, username: req.body.username, password: hashedPassword });
-  res.redirect('/users');
+  req.flash('success', 'Registration successful! You may now log in.');
+  res.redirect('/login');
 };
 
 // Show all users

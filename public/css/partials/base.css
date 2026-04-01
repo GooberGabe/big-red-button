@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
+
+:root {
+  --bg: #f9f9fb;
+  --text: #121214;
+  --accent: #c1121f;
+  --muted: #575757;
+  --card: #ffffff;
+  --border: #e1e1e6;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }

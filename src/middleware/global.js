@@ -28,11 +28,16 @@ export const addLocalVariables = (req, res, next) => {
   res.locals.NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
   res.locals.queryParams = req.query || {};
   setHeadAssetsFunctionality(res);
-  
-  // Convenience variable for UI state based on session state
+
+  // Convenience variables for UI state based on session state
   res.locals.isLoggedIn = false;
+  res.locals.isAdmin = false;
   if (req.session && req.session.user) {
     res.locals.isLoggedIn = true;
+    if (req.session.user.role === 'admin') {
+      res.locals.isAdmin = true;
+    }
   }
+
   next();
 }

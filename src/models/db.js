@@ -9,8 +9,14 @@ const __dirname = path.dirname(__filename);
 
 const caCert = fs.readFileSync(path.join(__dirname, '../../bin', 'byuicse-psql-cert.pem'));
 
+const poolMax = Number(process.env.PG_POOL_MAX || 5);
+
 const pool = new Pool({
+  // Will hopefully fix the database connection overload  
   connectionString: process.env.DB_URL,
+    max: Number.isFinite(poolMax) && poolMax > 0 ? poolMax : 5,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 5000,
   ssl: {
     ca: caCert,  // Use the certificate content, not the file path
     rejectUnauthorized: true,  // Keep this true for proper security
@@ -60,4 +66,4 @@ if (process.env.NODE_ENV.includes('dev') && process.env.ENABLE_SQL_LOGGING === '
 
 export default db;
 
-export { db , caCert };
+export { db, caCert, pool };

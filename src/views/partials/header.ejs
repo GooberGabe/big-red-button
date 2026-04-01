@@ -7,8 +7,8 @@
   <link rel="icon" type="image/x-icon" href="/css/icons/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/css/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/css/icons/favicon-16x16.png">
-  <%- renderStyles() %>
-  <%- renderScripts() %>
+  <%- typeof renderStyles === 'function' ? renderStyles() : '' %>
+  <%- typeof renderScripts === 'function' ? renderScripts() : '' %>
 </head>
 <body>
   <header class="site-header">
@@ -18,15 +18,42 @@
       </a>
     </div>
     <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/products">Products</a>
-      <a href="/users">Users</a>
-      <% if (!isLoggedIn) { %>
-        <a href="/login">Login</a>
+      <div class="nav-center">
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
         <a href="/register">Register</a>
-      <% } else { %>
-        <a href="/logout">Logout</a>
+        <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+          <a href="/users">Users</a>
+        <% } %>
+        <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+          <a href="/logout">Logout</a>
+        <% } else { %>
+          <a href="/login">Login</a>
+        <% } %>
+      </div>
+      <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+        <a href="/profile" class="profile-btn" title="Profile">
+          <img src="/css/icons/profile.png" alt="Profile" class="profile-icon" />
+        </a>
       <% } %>
     </nav>
   </header>
+
+  <% const flashMessages = typeof flash === 'function' ? flash() : { success: [], error: [], warning: [], info: [] }; %>
+  <% if (flashMessages.success.length || flashMessages.error.length || flashMessages.warning.length || flashMessages.info.length) { %>
+    <div class="flash-messages">
+      <% flashMessages.success.forEach(msg => { %>
+        <div class="flash flash-success"><%= msg %></div>
+      <% }); %>
+      <% flashMessages.error.forEach(msg => { %>
+        <div class="flash flash-error"><%= msg %></div>
+      <% }); %>
+      <% flashMessages.warning.forEach(msg => { %>
+        <div class="flash flash-warning"><%= msg %></div>
+      <% }); %>
+      <% flashMessages.info.forEach(msg => { %>
+        <div class="flash flash-info"><%= msg %></div>
+      <% }); %>
+    </div>
+  <% } %>
   <main class="page">

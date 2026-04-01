@@ -6,15 +6,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-/**
- * Sets up the database by running the seed.sql file if needed.
- * Checks if products table has data - if not, runs a full re-seed.
- */
+
 const setupDatabase = async () => {
-    /**
-     * Check if products table has any rows and wrap in try-catch to handle cases
-     * where table doesn't exist yet.
-     */
+    
     let hasData = false;
     try {
         const result = await db.query(
@@ -22,10 +16,6 @@ const setupDatabase = async () => {
         );
         hasData = result.rows[0]?.has_data || false;
     } catch (error) {
-        /**
-         * If query fails (e.g., table doesn't exist), treat the same as no data.
-         * This allows the seed process to proceed.
-         */
         hasData = false;
     }
     
@@ -34,7 +24,6 @@ const setupDatabase = async () => {
         return true;
     }
     
-    // No products found - run full seed
     console.log('Seeding database...');
     const seedPath = join(__dirname, 'sql', 'seed.sql');
     const seedSQL = fs.readFileSync(seedPath, 'utf8');
@@ -44,9 +33,6 @@ const setupDatabase = async () => {
     return true;
 };
 
-/**
- * Tests the database connection by executing a simple query.
- */
 const testConnection = async () => {
     const result = await db.query('SELECT NOW() as current_time');
     console.log('Database connection successful:', result.rows[0].current_time);

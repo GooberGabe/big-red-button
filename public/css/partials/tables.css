@@ -1,0 +1,18 @@
+/* Table styles */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+}
+.user-table th, .user-table td {
+  border: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+.user-table th {
+  background: var(--card);
+  font-weight: 700;
+}
+.user-table tr:nth-child(even) {
+  background: #f6f6fa;
+}
