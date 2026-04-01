@@ -10,3 +10,10 @@ Foundational Express + EJS MVC app for the Big Red Button card game.
 - `src/models` – Domain data placeholders (to be replaced with PostgreSQL)
 - `src/views` – EJS templates and partials
 - `public` – Static assets (CSS, images)
+
+## LLM Usage
+
+Generative AI was used in the following applications:
+- Most CSS styles
+- EJS partials (for HTML structure)
+- Database queries (sql/seed.sql)
