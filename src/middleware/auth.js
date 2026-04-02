@@ -8,7 +8,7 @@ const requireLogin = (req, res, next) => {
 
 const requireAdmin = (req, res, next) => {
     console.log(req.session);
-    if (req.session && req.session.user && req.session.user.role == 'admin') {
+    if (req.session && req.session.user && res.locals.isAdmin == true) {
         next();
     } else {
         res.redirect('/');
